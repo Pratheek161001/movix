@@ -13,7 +13,7 @@ import PageNotFound from "./pages/pageNotFound/pageNotFound"
 
 function App() {
   const dispatch = useDispatch()
-  const{url}=useSelector((state)=>state.home);
+  const {url}=useSelector((state)=>state.home);
   console.log(url);
   
   useEffect(()=>{
@@ -25,11 +25,13 @@ function App() {
       .then((res)=>{
         console.log(res);
 
-        // const url={
-        //   backdrop:res.images.
-        // }
+        const url={
+          backdrop:res.images.secure_base_url + "original",
+          poster:res.images.secure_base_url + "original",
+          profile:res.images.secure_base_url + "original",
+        }
 
-        dispatch(getApiConfiguration(res))
+        dispatch(getApiConfiguration(url))
     })
     .catch((err)=>{
       console.log(err)
