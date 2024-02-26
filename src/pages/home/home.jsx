@@ -11,3 +11,4 @@ import HeroBanner from"./heroBanner/heroBanner"
   )
 }
 export default Home;
+...
