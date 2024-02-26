@@ -5,10 +5,10 @@ import useFetch from '../../../hooks/useFetch'
 import Carousel from '../../../components/carousel/Carousel'
 
 const Popular = () => {
-    const [endpoint,Setendpoint]=useState("movie")
-    const {data,loading}=useFetch(`/${endpoint}/popular`)
-    const onTabChange=(tab)=>{
-        Setendpoint(tab==='Movies'?'movie':'tv')
+    const [endpoint,Setendpoint]=useState("movie");
+    const { data, loading} = useFetch(`/${endpoint}/popular`);
+    const onTabChange = (tab) => {
+        Setendpoint(tab === 'Movies' ? 'movie' : 'tv')
     }
   return (
     <div className='carouselSection'>

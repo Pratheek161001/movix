@@ -13,6 +13,10 @@ import Img from "../../../components/lazyloadimage/img.jsx";
 import PosterFallback from "../../../assets/no-poster.png";
 
 const DetailsBanner = ({ video, crew }) => {
+    const {mediaType, id}=useParams();
+    const {data, loading}=useFetch(`/${mediaType}/${id}`)
+    const {url}=useSelector((state)=>state.home);
+    const _genres = data?.genres?.map((g)=>g.id);
 
     const toHoursAndMinutes = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
@@ -23,8 +27,37 @@ const DetailsBanner = ({ video, crew }) => {
     return (
         <div className="detailsBanner">
             {!loading ? (
-                <div>Details Content...</div>
-            ) : (
+                <>
+                    {!!data && (
+                        <React.Fragment>
+                            <div className="backdrop-img">
+                                <Img src={url.backdrop + data?.backdrop_path}/>
+                            </div>
+                            <div className="opacity-layer"></div>
+                            <ContentWrapper>
+                                <div className="content">
+                                    <div className="left">
+                                        {data.poster_path ? (
+                                            <Img className='posterImg' src={url.backdrop + data.poster_path}/>):(<Img className='posterImg' src={PosterFallback}/>)}
+                                    </div>
+                                    <div className="right">
+                                        <div className="title">
+                                            {`${data.name || data.title} (${dayjs(data?.release_date).format('YYYY')})`}
+                                        </div>
+                                        <div className="subtitle">
+                                            {data.tagline}
+                                        </div>
+                                        <Genres data={_genres}/>
+                                        <div className="row">
+                                            <CircleRating rating={data.vote_average.toFixed(1)}/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ContentWrapper>
+                        </React.Fragment>
+                    )}
+                </>
+            ) : ( 
                 <div className="detailsBannerSkeleton">
                     <ContentWrapper>
                         <div className="left skeleton"></div>
