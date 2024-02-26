@@ -19,8 +19,11 @@ const Carousel = ({ data , loading }) => {
     const carouselContainer = useRef();
     const {url}=useSelector((state)=>state.home);
     const navigate=useNavigate();
+
     const navigation =(dir)=>{
-        
+        const container = carouselContainer.current;
+        const scrollAmount = dir === "left" ? container.scrollLeft - (container.offsetWidth + 20) : container.scrollLeft + (container.offsetWidth + 20);
+        container.scrollTo({left:scrollAmount , behavior:"smooth",});
     }
     const skItem=()=>{
         return(
@@ -45,10 +48,10 @@ const Carousel = ({ data , loading }) => {
                 />
                 <BsFillArrowRightCircleFill
                 className="carouselRighttNav arrow"
-                onClick={()=>navigation('left')}
+                onClick={()=>navigation('right')}
                 />
                 {!loading ? (
-                    <div className="carouselItems">
+                    <div className="carouselItems" ref={carouselContainer}>
                         {data?.map((item)=>{
                             const posterUrl = item.poster_path ? url.poster + item.poster_path : PosterFallback;
                             return(
