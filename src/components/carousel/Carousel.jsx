@@ -42,6 +42,7 @@ const Carousel = ({ data , loading ,endpoint,title}) => {
   return (
     <div className="carousel">
         <ContentWrapper>
+            {title && <div className="carouelTitle">{title}</div>}
             <BsFillArrowLeftCircleFill
                 className="carouselLeftNav arrow"
                 onClick={()=>navigation('left')}
