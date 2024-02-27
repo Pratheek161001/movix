@@ -3,7 +3,7 @@ import './style.scss'
 import ContentWrapper from "../../../components/contentWrapper/ContentWrapper";
 import { PlayIcon } from "../Playbtn";
 import VideoPopup from "../../../components/videopopup/VideoPopUp";
-import Img from "../../../components/lazyloadimage/img";
+import Img from "../../../components/lazyloadimage/Img";
 const VideosSection = ({ data, loading }) => {
     const [show, setShow] = useState(false);
     const [videoId, setVideoId] = useState(null);
